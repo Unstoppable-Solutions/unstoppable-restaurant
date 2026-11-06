@@ -1,0 +1,773 @@
+/**
+ * Unstoppable Restaurant Admin Styles
+ * Professional, modern admin interface
+ * 
+ * @package Unstoppable_Restaurant
+ */
+
+/* ==========================================================================
+   CSS Variables - Unstoppable Branding
+   ========================================================================== */
+
+:root {
+    /* Brand Colors */
+    --urst-gold: #f0b849;
+    --urst-gold-dark: #d9a43a;
+    --urst-primary: #2563eb;
+    --urst-primary-hover: #1d4ed8;
+    --urst-primary-light: #dbeafe;
+    --urst-success: #059669;
+    --urst-success-light: #d1fae5;
+    
+    /* Neutrals */
+    --urst-text: #111827;
+    --urst-text-secondary: #4b5563;
+    --urst-text-muted: #6b7280;
+    --urst-border: #e5e7eb;
+    --urst-border-light: #f3f4f6;
+    --urst-bg: #f9fafb;
+    --urst-bg-alt: #f3f4f6;
+    --urst-white: #ffffff;
+    
+    /* Spacing */
+    --urst-radius: 8px;
+    --urst-radius-lg: 12px;
+    --urst-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --urst-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* ==========================================================================
+   Page Layout
+   ========================================================================== */
+
+.urst-admin-wrap {
+    margin: 20px 20px 20px 2px;
+    max-width: 1200px;
+}
+
+.urst-admin-wrap h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--urst-text);
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.urst-admin-wrap h1 .dashicons {
+    color: var(--urst-gold);
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+}
+
+.urst-page-description {
+    font-size: 14px;
+    color: var(--urst-text-muted);
+    margin: 0 0 24px 0;
+}
+
+/* ==========================================================================
+   Header Bar
+   ========================================================================== */
+
+.urst-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--urst-border);
+}
+
+.urst-header-bar h1 {
+    margin: 0;
+}
+
+.urst-header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* ==========================================================================
+   Two Column Layout
+   ========================================================================== */
+
+.urst-admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+    align-items: start;
+}
+
+.urst-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.urst-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (max-width: 1100px) {
+    .urst-admin-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .urst-sidebar {
+        order: -1;
+    }
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.urst-card {
+    background: var(--urst-white);
+    border: 1px solid var(--urst-border);
+    border-radius: var(--urst-radius-lg);
+    box-shadow: var(--urst-shadow);
+    overflow: hidden;
+}
+
+.urst-card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--urst-border);
+    background: var(--urst-bg);
+}
+
+.urst-card-header h2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--urst-text);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.urst-card-body {
+    padding: 24px;
+}
+
+.urst-card-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--urst-border);
+    background: var(--urst-bg);
+}
+
+/* Quick Start Card */
+.urst-card--quickstart {
+    border-color: var(--urst-gold);
+    border-width: 2px;
+}
+
+.urst-card--quickstart .urst-card-header {
+    background: linear-gradient(135deg, #fef9e7 0%, #fdf6e3 100%);
+    border-bottom-color: #fde68a;
+}
+
+.urst-card--quickstart .urst-card-header h2 {
+    color: #92400e;
+}
+
+.urst-shortcode-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.urst-shortcode {
+    flex: 1;
+    display: block;
+    background: var(--urst-bg-alt);
+    border: 1px solid var(--urst-border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    color: var(--urst-primary);
+    user-select: all;
+}
+
+.urst-copy-btn {
+    padding: 10px 16px;
+    background: var(--urst-bg-alt);
+    border: 1px solid var(--urst-border);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--urst-text-secondary);
+    font-size: 13px;
+    transition: all 0.15s ease;
+}
+
+.urst-copy-btn:hover {
+    background: var(--urst-border);
+    color: var(--urst-text);
+}
+
+.urst-help-text {
+    font-size: 13px;
+    color: var(--urst-text-muted);
+    margin: 0;
+}
+
+.urst-help-text .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+    margin-right: 4px;
+}
+
+/* ==========================================================================
+   Section Headings
+   ========================================================================== */
+
+.urst-section {
+    margin-bottom: 28px;
+}
+
+.urst-section:last-child {
+    margin-bottom: 0;
+}
+
+.urst-section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--urst-text);
+    margin: 0 0 16px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--urst-border-light);
+}
+
+/* ==========================================================================
+   Layout Selector (Radio Cards)
+   ========================================================================== */
+
+.urst-layout-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 900px) {
+    .urst-layout-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.urst-layout-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 2px solid var(--urst-border);
+    border-radius: var(--urst-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--urst-white);
+}
+
+.urst-layout-card:hover {
+    border-color: var(--urst-primary);
+    box-shadow: var(--urst-shadow-md);
+}
+
+.urst-layout-card.is-selected {
+    border-color: var(--urst-primary);
+    background: var(--urst-primary-light);
+}
+
+.urst-layout-card.is-selected::after {
+    content: '✓';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 22px;
+    height: 22px;
+    background: var(--urst-primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.urst-layout-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.urst-layout-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--urst-bg-alt);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.urst-layout-icon .dashicons {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: var(--urst-primary);
+}
+
+.urst-layout-card.is-selected .urst-layout-icon {
+    background: var(--urst-white);
+}
+
+.urst-layout-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--urst-text);
+    margin-bottom: 6px;
+}
+
+.urst-layout-desc {
+    font-size: 13px;
+    color: var(--urst-text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Category Pills
+   ========================================================================== */
+
+.urst-category-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.urst-category-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--urst-white);
+    border: 1px solid var(--urst-border);
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--urst-text);
+    transition: all 0.15s ease;
+}
+
+.urst-category-pill:hover {
+    background: var(--urst-bg);
+    border-color: var(--urst-text-muted);
+}
+
+.urst-category-pill input[type="checkbox"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.urst-category-pill input[type="checkbox"]:checked + .urst-category-name {
+    color: var(--urst-primary);
+    font-weight: 500;
+}
+
+.urst-category-count {
+    font-size: 12px;
+    color: var(--urst-text-muted);
+    background: var(--urst-bg-alt);
+    padding: 2px 8px;
+    border-radius: 100px;
+}
+
+/* ==========================================================================
+   Toggle Switches
+   ========================================================================== */
+
+.urst-toggle-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.urst-toggle-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--urst-border-light);
+}
+
+.urst-toggle-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.urst-toggle-item:first-child {
+    padding-top: 0;
+}
+
+.urst-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.urst-toggle-text {
+    font-size: 14px;
+    color: #1d2327;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.urst-toggle-label {
+    font-size: 14px;
+    color: #1d2327;
+    white-space: nowrap;
+    line-height: 24px;
+    display: inline-block;
+}
+
+label.urst-toggle,
+.urst-toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.urst-toggle input[type="checkbox"] {
+    position: absolute !important;
+    opacity: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.urst-toggle-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    cursor: pointer;
+    background: #c3c4c7;
+    border-radius: 24px;
+    transition: background 0.2s;
+}
+
+.urst-toggle-slider::before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.urst-toggle input[type="checkbox"]:checked + .urst-toggle-slider {
+    background: #2271b1;
+}
+
+.urst-toggle input[type="checkbox"]:checked + .urst-toggle-slider::before {
+    transform: translateX(20px);
+}
+
+/* ==========================================================================
+   Days Picker
+   ========================================================================== */
+
+.urst-days-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.urst-day-option {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 40px;
+    padding: 0 12px;
+    background: #f0f0f1;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1d2327;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.urst-day-option:hover {
+    background: #e0e0e0;
+    border-color: #8c8f94;
+}
+
+.urst-day-option input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+    z-index: 1;
+}
+
+.urst-day-option.selected,
+.urst-day-option:has(input:checked) {
+    background: #1d2327;
+    border-color: #1d2327;
+    color: #fff;
+}
+
+.urst-day-option.selected:hover,
+.urst-day-option:has(input:checked):hover {
+    background: #2c3338;
+    border-color: #2c3338;
+}
+
+.urst-day-abbr {
+    position: relative;
+    z-index: 0;
+}
+
+/* ==========================================================================
+   Color Pickers
+   ========================================================================== */
+
+.urst-color-row {
+    display: flex;
+    gap: 32px;
+}
+
+.urst-color-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.urst-color-field label {
+    font-size: 14px;
+    color: var(--urst-text);
+    min-width: 60px;
+}
+
+.urst-color-input {
+    position: relative;
+}
+
+.urst-color-input input[type="color"] {
+    width: 60px;
+    height: 36px;
+    padding: 3px;
+    border: 2px solid var(--urst-border);
+    border-radius: var(--urst-radius);
+    cursor: pointer;
+    background: var(--urst-white);
+}
+
+.urst-color-input input[type="color"]:hover {
+    border-color: var(--urst-text-muted);
+}
+
+/* ==========================================================================
+   Sidebar Cards
+   ========================================================================== */
+
+.urst-info-card {
+    background: var(--urst-white);
+    border: 1px solid var(--urst-border);
+    border-radius: var(--urst-radius-lg);
+    padding: 20px;
+}
+
+.urst-info-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--urst-text);
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.urst-info-card h3 .dashicons {
+    color: var(--urst-gold);
+}
+
+.urst-info-card p {
+    font-size: 13px;
+    color: var(--urst-text-muted);
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+}
+
+.urst-info-card ul {
+    margin: 0 0 16px 0;
+    padding-left: 20px;
+}
+
+.urst-info-card li {
+    font-size: 13px;
+    color: var(--urst-text-secondary);
+    margin-bottom: 6px;
+}
+
+.urst-info-card .button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+/* Pro Card */
+.urst-card--pro {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    border: none;
+    color: white;
+}
+
+.urst-card--pro h3 {
+    color: white;
+}
+
+.urst-card--pro h3 .dashicons {
+    color: var(--urst-gold);
+}
+
+.urst-card--pro p {
+    color: rgba(255,255,255,0.8);
+}
+
+.urst-card--pro ul {
+    list-style: none;
+    padding: 0;
+}
+
+.urst-card--pro li {
+    color: rgba(255,255,255,0.9);
+    padding-left: 24px;
+    position: relative;
+}
+
+.urst-card--pro li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--urst-gold);
+    font-weight: bold;
+}
+
+.urst-card--pro .button {
+    background: var(--urst-gold);
+    border-color: var(--urst-gold);
+    color: #1e1b4b;
+    font-weight: 600;
+}
+
+.urst-card--pro .button:hover {
+    background: var(--urst-gold-dark);
+    border-color: var(--urst-gold-dark);
+    color: #1e1b4b;
+}
+
+/* ==========================================================================
+   Submit Button
+   ========================================================================== */
+
+.urst-submit-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.urst-submit-row .button-primary {
+    background: var(--urst-primary);
+    border-color: var(--urst-primary);
+    padding: 10px 28px;
+    height: auto;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--urst-radius);
+    box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2);
+}
+
+.urst-submit-row .button-primary:hover,
+.urst-submit-row .button-primary:focus {
+    background: var(--urst-primary-hover);
+    border-color: var(--urst-primary-hover);
+}
+
+.urst-save-status {
+    font-size: 13px;
+    color: var(--urst-success);
+    display: none;
+}
+
+.urst-save-status.is-visible {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 782px) {
+    .urst-admin-wrap {
+        margin: 10px;
+    }
+    
+    .urst-header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .urst-layout-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .urst-color-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .urst-category-grid {
+        gap: 8px;
+    }
+    
+    .urst-category-pill {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}

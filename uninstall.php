@@ -1,21 +1,39 @@
 <?php
 /**
- * Uninstall handler for __PLUGIN_NAME__.
+ * Uninstall handler for Unstoppable Restaurant for WooCommerce.
  *
- * Runs when the plugin is deleted from Plugins → Installed Plugins. Deactivation
- * alone does NOT trigger this file. Clean up all plugin data (database tables,
- * options, transients, cron hooks) so the site is returned to the state it
- * was in before the plugin was installed.
+ * Runs only when the plugin is deleted from Plugins -> Installed Plugins.
+ * Deactivation does NOT trigger this file.
  *
- * @package __PLUGIN_PACKAGE__
+ * Removes plugin settings and transients. Menus and modifier flows (custom
+ * post types) are intentionally kept: they are the restaurant's own content,
+ * and deleting them on uninstall would destroy work a site owner may want
+ * back if they reinstall.
+ *
+ * @package Unstoppable_Restaurant
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
-// Example cleanup — adjust as the plugin grows:
-//
-// delete_option( '__prefix___settings' );
-// delete_option( '__prefix___db_version' );
-//
-// global $wpdb;
-// $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}__prefix___my_table" );
+$urst_options = array(
+	'urst_settings',
+	'urst_product_labels',
+	'urst_menu_migration_complete',
+	'urst_health_warnings_dismissed',
+	'urst_health_warnings_dismissed_time',
+);
+
+foreach ( $urst_options as $urst_option ) {
+	delete_option( $urst_option );
+}
+
+// Short-lived per-post modifier validation warnings (urst_modifier_warnings_{post_id}).
+global $wpdb;
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- One-time cleanup on uninstall; no API exists to delete transients by prefix.
+$wpdb->query(
+	$wpdb->prepare(
+		"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
+		$wpdb->esc_like( '_transient_urst_modifier_warnings_' ) . '%',
+		$wpdb->esc_like( '_transient_timeout_urst_modifier_warnings_' ) . '%'
+	)
+);

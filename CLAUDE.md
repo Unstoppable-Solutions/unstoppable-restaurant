@@ -1,16 +1,16 @@
-# __PLUGIN_SLUG__
+# unstoppable-restaurant
 
 > This file is for Claude Code sessions working on this repo. For a human-oriented overview see `README.md`.
 
 ## What this plugin does
 
-__PLUGIN_SHORT_DESCRIPTION__
+Restaurant ordering foundation for WooCommerce: menus (CPT + shortcode), Classic / Modern Tabs / Minimal layouts, cart drawer, conversational modifiers, product labels, sorting and basic menu scheduling. Printing, automation and messaging live in the separate Pro plugin, which extends this one only through hooks and filters.
 
-- **Main PHP file:** `__PLUGIN_SLUG__.php`
-- **Code prefix:** `__PREFIX___` (constants / class prefix); `__prefix___` (lowercase for options / tables)
-- **Package:** `__PLUGIN_PACKAGE__`
-- **WordPress.org slug:** `__PLUGIN_SLUG__`
-- **WP.org URL:** https://wordpress.org/plugins/__PLUGIN_SLUG__/
+- **Main PHP file:** `unstoppable-restaurant.php`
+- **Code prefix:** `URST_` (constants / class prefix); `urst_` (lowercase for options / tables)
+- **Package:** `Unstoppable_Restaurant`
+- **WordPress.org slug:** `unstoppable-restaurant`
+- **WP.org URL:** https://wordpress.org/plugins/unstoppable-restaurant/
 
 ## Base44 Pro mapping
 
@@ -23,8 +23,8 @@ Releases are deployed to WordPress.org SVN automatically by GitHub Actions. The 
 
 1. Finish feature work on `main`.
 2. Bump the version in **all** of these:
-   - `__PLUGIN_SLUG__.php` — `Version:` header
-   - `__PLUGIN_SLUG__.php` — `__PREFIX___VERSION` constant (if present)
+   - `unstoppable-restaurant.php` — `Version:` header
+   - `unstoppable-restaurant.php` — `URST_VERSION` constant (if present)
    - `readme.txt` — `Stable tag:`
    - `readme.txt` — add a `== Changelog ==` entry
 3. Commit and push `main`.
@@ -37,7 +37,23 @@ Every push and PR runs the official WordPress Plugin Check against the codebase 
 
 **Secrets used by deploy:** `SVN_USERNAME`, `SVN_PASSWORD` — org-level secrets on `unstoppable-solutions`. Nothing per-repo.
 
-Both workflows carry an `if: ${{ ! github.event.repository.is_template }}` guard, so they are inert on the template itself (where placeholder tokens like `__PLUGIN_SLUG__` would otherwise fail Plugin Check parsing).
+Both workflows carry an `if: ${{ ! github.event.repository.is_template }}` guard, so they are inert on the template itself (where the template's placeholder tokens would otherwise fail Plugin Check parsing).
+
+## Project ground rules
+
+Read `docs/UNSTOPPABLE_RESTAURANT_CANONICAL_SPEC.md` before writing code. It wins any conflict. Short version:
+
+- Free must work fully without Pro. No printing code in Free, ever.
+- Never block checkout; side effects are async.
+- No heavy logic on every page load. Performance regressions block a release.
+- No site-specific hacks.
+
+## Hard-won lessons (read before touching cart, assets or admin CSS)
+
+- **Minified assets load by default.** `Assets.php` enqueues `*.min.js` / `*.min.css` unless `SCRIPT_DEBUG` is on. Any edit to `frontend.js`, `admin.js` or a CSS file must also update its `.min` twin, or the change never reaches a live site. (This caused the v2.18.17-2.18.19 "fixes didn't work" loop.)
+- **Shipping calculation is the cart-drawer bottleneck.** Every handler that calls `CartDrawer::get_cart_html()` must wrap it in the four shipping filters at priority 9999 (`woocommerce_shipping_enabled`, `woocommerce_shipping_show_shipping_calculator`, `woocommerce_cart_ready_to_calc_shipping`, `woocommerce_cart_needs_shipping`) and remove them after. Distance-rate shipping plugins otherwise add 30-45s per cart action.
+- **WP admin CSS overrides custom toggles.** The scheduling toggle uses a wrapper div with the switch and its text in separate `<label>`s. Don't put the text back inside the switch label.
+- `chrome-extension://...` console errors and "message channel closed" promise errors on the user's test site come from browser extensions, not this plugin.
 
 ## Known phpcs:ignores specific to this plugin
 
@@ -60,8 +76,8 @@ _(none yet — add here as you ignore specific checks, one bullet per site, with
   1. Make the change on `main` (or a branch).
   2. Watch Plugin Check CI — do not merge red.
   3. For a release: follow the Release workflow section above.
-- The free plugin and its Pro add-on live in **separate repos**. This repo is the free side; Pro has its own repo (private) when it exists.
+- The free plugin and its Pro add-on live in **separate repos**. This repo is the free side; Pro lives in `Unstoppable-Solutions/unstoppable-restaurant-pro` (private) once created.
 
 ## Repository layout
 
-Standard WordPress plugin layout — `__PLUGIN_SLUG__.php` is the bootstrap, `includes/` holds the classes, `assets/` holds CSS/JS, `languages/` holds the `.pot`, `readme.txt` is the WP.org directory listing, `.github/` holds the CI and deploy workflows.
+`unstoppable-restaurant.php` is the bootstrap (PSR-4-style autoload under `includes/`: `Core/`, `Admin/`, `Menu/`, `Modules/<Module>/`), `templates/` holds theme-overridable views (`yourtheme/unstoppable-restaurant/...`), `docs/` holds the canonical spec (not shipped), `assets/` holds CSS/JS, `languages/` holds the `.pot`, `readme.txt` is the WP.org directory listing, `.github/` holds the CI and deploy workflows.

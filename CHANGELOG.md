@@ -6,8 +6,6 @@ page. This file follows the format described at https://keepachangelog.com.
 
 ## [Unreleased]
 
-- Initial template scaffold.
+## [2.18.20]
 
-## [0.1.0]
-
-- Initial development release.
+- First release tracked on GitHub. Imported from the 2.18.x line; full history is in `readme.txt`.
